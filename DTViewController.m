@@ -9,7 +9,9 @@
 //
 
 #import "DTViewController.h"
+
 #define CELL_ID @"DTCell"
+#define DTDonateShownKey @"DTDonateShown"
 
 
 @implementation DTViewController
@@ -18,7 +20,28 @@
 	self = [super initWithStyle:UITableViewStylePlain];
 	self.title = @"Delete songs";
 	self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:self.title image:[UIImage imageNamed:@"BarSongs.png"] tag:9999 ] autorelease];
+	UIAlertView *av = [[UIAlertView alloc] init];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:DTDonateShownKey] == NO) {
+		av.title = @"Please donate";
+		av.message = @"Lots of hard work went to the development of this tweak. If you like it, I'd greatly appreciate donations in order to buy 	myself a new iPhone which could help me continuing development. Thank you very much!";
+		av.delegate = self;
+		[av addButtonWithTitle:@"Donate"];
+		[av addButtonWithTitle:@"Later"];
+		[av show];
+		[av release];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:DTDonateShownKey];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
 	return self;
+}
+
+// UIAlertViewDelegate
+
+- (void) alertView:(UIAlertView *)av didDismissWithButtonIndex:(int)index {
+	if (index == 0) {
+		// User hit Donate!
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://apaczai.elte.hu/~13akga/donate/index.html"]];
+	}
 }
 
 // UITableViewDelegate

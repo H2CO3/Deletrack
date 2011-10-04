@@ -13,7 +13,7 @@
 #import <MFMusicLibrary/MFMusicLibrary.h>
 
 
-@interface DTViewController: UITableViewController {	
+@interface DTViewController: UITableViewController <UIAlertViewDelegate> {	
 }
 
 @end
