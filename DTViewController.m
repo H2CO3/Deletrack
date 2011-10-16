@@ -20,8 +20,8 @@
 	self = [super initWithStyle:UITableViewStylePlain];
 	self.title = @"Delete songs";
 	self.tabBarItem = [[[UITabBarItem alloc] initWithTitle:self.title image:[UIImage imageNamed:@"BarSongs.png"] tag:9999 ] autorelease];
-	UIAlertView *av = [[UIAlertView alloc] init];
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:DTDonateShownKey] == NO) {
+		UIAlertView *av = [[UIAlertView alloc] init];
 		av.title = @"Please donate";
 		av.message = @"Lots of hard work went to the development of this tweak. If you like it, I'd greatly appreciate donations in order to buy 	myself a new iPhone which could help me continuing development. Thank you very much!";
 		av.delegate = self;
